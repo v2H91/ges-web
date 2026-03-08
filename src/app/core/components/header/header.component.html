@@ -3,7 +3,7 @@
     <div class="container">
       <div class="contact-info">
         <span><i class="fas fa-phone-alt"></i> Hotline: <strong>0936.262.604</strong></span>
-        <span><i class="fas fa-envelope"></i> contac</span>
+        <span><i class="fas fa-envelope"></i> giaiphapdoanhnghiepglobal&#64;gmail.com</span>
       </div>
       <div class="top-links">
         <a href="#">Hỗ trợ 24/7</a>
@@ -33,9 +33,9 @@
             <li><a href="#">Chữ ký số - Hóa đơn điện tử</a></li>
           </ul>
         </li>
-        <li><a href="#">Đào Tạo</a></li>
+        <li><a href="#" (click)="openTraining($event)">Đào Tạo</a></li>
         <li><a routerLink="/tin-tuc">Tin Tức</a></li>
-        <li><a href="#">Liên Hệ</a></li>
+        <li><a href="#" (click)="openContact($event)">Liên Hệ</a></li>
       </ul>
 
       <div class="cta-button">
@@ -44,3 +44,24 @@
     </div>
   </nav>
 </header>
+
+<!-- Contact Modal -->
+<div class="modal-backdrop" *ngIf="showContactModal || showTrainingModal">
+  <div class="modal-content">
+    <button class="close-btn" (click)="closeModals()">&times;</button>
+    <form *ngIf="showContactModal">
+      <h2>Liên hệ với chúng tôi</h2>
+      <label>Name:<input type="text" placeholder="Họ tên"></label>
+      <label>Email:<input type="email" placeholder="Email"></label>
+      <label>Phone:<input type="tel" placeholder="Số điện thoại"></label>
+      <button type="submit">Gửi</button>
+    </form>
+    <form *ngIf="showTrainingModal">
+      <h2>Đăng ký đào tạo</h2>
+      <label>Name:<input type="text" placeholder="Họ tên"></label>
+      <label>Email:<input type="email" placeholder="Email"></label>
+      <label>Phone:<input type="tel" placeholder="Số điện thoại"></label>
+      <button type="submit">Gửi</button>
+    </form>
+  </div>
+</div>
