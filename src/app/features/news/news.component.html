@@ -1,0 +1,20 @@
+<section class="news-section">
+  <div class="container">
+    <div class="section-header">
+      <h1>Tin Tức</h1>
+      <p>Cập nhật những tin tức mới nhất về kế toán, thuế và tài chính</p>
+    </div>
+
+    <div class="news-grid">
+      <div class="news-card" *ngFor="let news of newsList">
+        <div class="news-meta">
+          <span class="category">{{ news.category }}</span>
+          <span class="date">{{ news.date | date:'dd/MM/yyyy' }}</span>
+        </div>
+        <h3>{{ news.title }}</h3>
+        <p>{{ news.summary }}</p>
+        <a href="#" class="read-more">Đọc thêm <i class="fas fa-arrow-right"></i></a>
+      </div>
+    </div>
+  </div>
+</section>
