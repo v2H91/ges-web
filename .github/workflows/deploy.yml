@@ -1,21 +1,54 @@
 name: Build and Deploy to Cloud Run
 
 on:
-push:
-branches:
-  - main
+  push:
+    branches:
+      - main
 
 env:
-PROJECT_ID: "project-20721e3d-1ee6-407e-a0a"
-WIF_PROVIDER: "projects/861504992570/locations/global/workloadIdentityPools/github-pool/providers/github-provider"
-SA_EMAIL: "github-deployer@project-20721e3d-1ee6-407e-a0a.iam.gserviceaccount.com"
-REGION: "asia-southeast1"
-SERVICE_NAME: "ges-web"
-REPO_NAME: "ges-repo"
+  PROJECT_ID: "project-20721e3d-1ee6-407e-a0a"
+  WIF_PROVIDER: "projects/861504992570/locations/global/workloadIdentityPools/github-pool/providers/github-provider"
+  SA_EMAIL: "github-deployer@project-20721e3d-1ee6-407e-a0a.iam.gserviceaccount.com"
+  REGION: "asia-southeast1"
+  SERVICE_NAME: "ges-web"
+  REPO_NAME: "ges-repo"
 
 jobs:
-deploy:
-runs-on: ubuntu-latest
-permissions:
-contents: "read"
-id-token: "write"
+  deploy:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+      id-token: write
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Authenticate to Google Cloud
+        uses: google-github-actions/auth@v2
+        with:
+          workload_identity_provider: ${{ env.WIF_PROVIDER }}
+          service_account: ${{ env.SA_EMAIL }}
+
+      - name: Setup gcloud
+        uses: google-github-actions/setup-gcloud@v2
+
+      - name: Configure Docker
+        run: gcloud auth configure-docker ${{ env.REGION }}-docker.pkg.dev
+
+      - name: Build Docker image
+        run: |
+          docker build -t ${{ env.REGION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.REPO_NAME }}/${{ env.SERVICE_NAME }}:${{ github.sha }} .
+
+      - name: Push Docker image
+        run: |
+          docker push ${{ env.REGION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.REPO_NAME }}/${{ env.SERVICE_NAME }}:${{ github.sha }}
+
+      - name: Deploy to Cloud Run
+        run: |
+          gcloud run deploy ${{ env.SERVICE_NAME }} \
+            --image ${{ env.REGION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.REPO_NAME }}/${{ env.SERVICE_NAME }}:${{ github.sha }} \
+            --region ${{ env.REGION }} \
+            --platform managed \
+            --allow-unauthenticated
