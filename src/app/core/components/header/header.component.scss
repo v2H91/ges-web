@@ -54,14 +54,16 @@ $transition: all 0.3s ease;
       }
     }
 
-    .menu {
+    /* mobile-first: stack menu items vertically by default */
+  .menu {
       display: flex;
+      flex-direction: column;
       list-style: none;
       margin: 0;
 
       li {
         position: relative;
-        padding: 0 15px;
+        padding: 10px 0;
 
         a {
           text-decoration: none;
@@ -69,33 +71,46 @@ $transition: all 0.3s ease;
           font-weight: 500;
           transition: $transition;
           text-transform: uppercase;
-          font-size: 0.9rem;
+          font-size: 1rem;
 
           &:hover, &.active { color: $primary-color; }
         }
 
-        // Submenu (Dropdown)
+        /* mobile submenu hidden by default, can be toggled by JavaScript later */
         .submenu {
           display: none;
-          position: absolute;
-          top: 100%;
-          left: 0;
+          position: static;
           background: #fff;
-          width: 250px;
-          box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-          padding: 10px 0;
+          width: 100%;
+          padding: 0;
           z-index: 100;
 
           li {
-            padding: 10px 20px;
+            padding: 8px 15px;
             a { text-transform: none; display: block; }
             &:hover { background: #f8f9fa; }
           }
         }
-
-        &:hover .submenu { display: block; }
       }
     }
+
+/* larger screens override */
+@media (min-width: 768px) {
+  .menu {
+    flex-direction: row;
+
+    li { padding: 0 15px; }
+
+    .submenu {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      width: 250px;
+    }
+
+    &:hover .submenu { display: block; }
+  }
+}
 
     .btn-quote {
       background: $secondary-color;

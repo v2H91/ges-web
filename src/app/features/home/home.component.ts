@@ -5,10 +5,7 @@ import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [
-    CommonModule,
-    ServicesSectionComponent // 2. Khai báo nó ở đây để HTML có thể hiểu thẻ <app-services-section>
-  ],
+  imports: [CommonModule, ServicesSectionComponent],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })

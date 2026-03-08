@@ -1,19 +1,37 @@
 <section class="news-section">
   <div class="container">
     <div class="section-header">
-      <h1>Tin Tức</h1>
-      <p>Cập nhật những tin tức mới nhất về kế toán, thuế và tài chính</p>
+      <h1>TIN TỨC CHUYÊN NGHIỆP</h1>
+      <p>Cập nhật nhanh các bài báo, phân tích về kế toán, thuế và quản trị tài chính.</p>
     </div>
 
-    <div class="news-grid">
-      <div class="news-card" *ngFor="let news of newsList">
-        <div class="news-meta">
-          <span class="category">{{ news.category }}</span>
-          <span class="date">{{ news.date | date:'dd/MM/yyyy' }}</span>
+    <div class="featured-article" *ngIf="newsList.length">
+      <div class="left">
+        <h2>{{ newsList[0].title }}</h2>
+        <div class="meta">
+          <span class="category">{{ newsList[0].category }}</span>
+          <span class="date">{{ newsList[0].date | date:'dd/MM/yyyy' }}</span>
         </div>
-        <h3>{{ news.title }}</h3>
-        <p>{{ news.summary }}</p>
+        <p>{{ newsList[0].summary }}</p>
         <a href="#" class="read-more">Đọc thêm <i class="fas fa-arrow-right"></i></a>
+      </div>
+      <div class="right">
+        <!-- placeholder image -->
+        <img src="assets/images/news-placeholder.jpg" alt="{{ newsList[0].title }}">
+      </div>
+    </div>
+
+    <div class="news-list">
+      <div class="item" *ngFor="let news of newsList.slice(1)">
+        <div class="details">
+          <h3>{{ news.title }}</h3>
+          <div class="meta">
+            <span class="category">{{ news.category }}</span>
+            <span class="date">{{ news.date | date:'dd/MM/yyyy' }}</span>
+          </div>
+          <p>{{ news.summary }}</p>
+        </div>
+        <a href="#" class="read-more">Đọc thêm</a>
       </div>
     </div>
   </div>
