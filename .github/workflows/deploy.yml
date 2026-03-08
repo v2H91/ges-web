@@ -11,7 +11,7 @@ env:
   SA_EMAIL: "github-deployer@project-20721e3d-1ee6-407e-a0a.iam.gserviceaccount.com"
   REGION: "asia-southeast1"
   SERVICE_NAME: "ges-web"
-  REPO_NAME: "ges-web"
+  REPO_NAME: "ges-repo"
 
 jobs:
   deploy:
@@ -30,9 +30,13 @@ jobs:
         with:
           workload_identity_provider: ${{ env.WIF_PROVIDER }}
           service_account: ${{ env.SA_EMAIL }}
+          export_environment_variables: true
 
       - name: Setup gcloud
         uses: google-github-actions/setup-gcloud@v2
+
+      - name: Set project
+        run: gcloud config set project ${{ env.PROJECT_ID }}
 
       - name: Configure Docker
         run: gcloud auth configure-docker ${{ env.REGION }}-docker.pkg.dev --quiet
@@ -50,5 +54,6 @@ jobs:
           gcloud run deploy ${{ env.SERVICE_NAME }} \
             --image ${{ env.REGION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.REPO_NAME }}/${{ env.SERVICE_NAME }}:${{ github.sha }} \
             --region ${{ env.REGION }} \
+            --project ${{ env.PROJECT_ID }} \
             --platform managed \
             --allow-unauthenticated
