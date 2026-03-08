@@ -1,0 +1,21 @@
+name: Build and Deploy to Cloud Run
+
+on:
+push:
+branches:
+  - main
+
+env:
+PROJECT_ID: "project-20721e3d-1ee6-407e-a0a"
+WIF_PROVIDER: "projects/861504992570/locations/global/workloadIdentityPools/github-pool/providers/github-provider"
+SA_EMAIL: "github-deployer@project-20721e3d-1ee6-407e-a0a.iam.gserviceaccount.com"
+REGION: "asia-southeast1"
+SERVICE_NAME: "ges-web"
+REPO_NAME: "ges-repo"
+
+jobs:
+deploy:
+runs-on: ubuntu-latest
+permissions:
+contents: "read"
+id-token: "write"
