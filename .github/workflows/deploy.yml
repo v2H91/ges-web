@@ -11,7 +11,7 @@ env:
   SA_EMAIL: "github-deployer@project-20721e3d-1ee6-407e-a0a.iam.gserviceaccount.com"
   REGION: "asia-southeast1"
   SERVICE_NAME: "ges-web"
-  REPO_NAME: "ges-repo"
+  REPO_NAME: "ges-web"
 
 jobs:
   deploy:
