@@ -1,0 +1,26 @@
+<section class="services-section">
+  <div class="container">
+    <div class="section-header">
+      <span class="sub-title">Giải Pháp Toàn Diện</span>
+      <h2>Dịch Vụ Chuyên Nghiệp Tại GES</h2>
+    </div>
+
+    <div class="services-grid">
+      <ng-container *ngIf="isExpanded">
+        <div class="service-card animate-in" *ngFor="let item of extraServices">
+          <div class="card-icon"><i [class]="item.icon"></i></div>
+          <h3>{{ item.title }}</h3>
+          <p>{{ item.desc }}</p>
+          <a [routerLink]="['/dich-vu', item.id]" class="read-more">Xem chi tiết <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </ng-container>
+    </div>
+
+    <div class="view-all">
+      <button class="btn-all" (click)="toggleServices()">
+        {{ isExpanded ? 'Thu Gọn Lại' : 'Xem Tất Cả 10+ Dịch Vụ' }}
+        <i class="fas" [ngClass]="isExpanded ? 'fa-chevron-up' : 'fa-chevron-down'"></i>
+      </button>
+    </div>
+  </div>
+</section>

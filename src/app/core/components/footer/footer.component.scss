@@ -1,0 +1,132 @@
+// variables.scss (Sử dụng lại các biến từ Header)
+$footer-bg: #0b1c39; // Xanh Navy đậm chuyên nghiệp
+$footer-text: #bdc3c7;
+$primary-color: #0056b3;
+$secondary-color: #f39c12;
+
+.footer-container {
+  background-color: $footer-bg;
+  color: $footer-text;
+  padding-top: 60px;
+  font-family: 'Roboto', sans-serif;
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+  }
+
+  .footer-content {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr; // Cột logo rộng hơn
+    gap: 40px;
+    padding-bottom: 40px;
+  }
+
+  .footer-column {
+    h4 {
+      color: #fff;
+      font-size: 1.2rem;
+      margin-bottom: 25px;
+      position: relative;
+      padding-bottom: 10px;
+
+      &::after {
+        content: '';
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 50px;
+        height: 2px;
+        background-color: $secondary-color;
+      }
+    }
+
+    .footer-logo {
+      display: flex;
+      align-items: center;
+      margin-bottom: 20px;
+      img { height: 50px; }
+      h3 { color: #fff; margin-left: 10px; font-size: 1.4rem; }
+    }
+
+    .description {
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+
+    .contact-list {
+      list-style: none;
+      padding: 0;
+      li {
+        margin-bottom: 12px;
+        i { color: $secondary-color; width: 25px; }
+      }
+    }
+
+    .footer-links {
+      list-style: none;
+      padding: 0;
+      li {
+        margin-bottom: 12px;
+        a {
+          color: $footer-text;
+          text-decoration: none;
+          transition: 0.3s;
+          i { font-size: 0.7rem; margin-right: 8px; color: $secondary-color; }
+          &:hover { color: #fff; padding-left: 5px; }
+        }
+      }
+    }
+
+    .social-icons {
+      margin-top: 20px;
+      a {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 35px;
+        height: 35px;
+        background: rgba(255,255,255,0.1);
+        color: #fff;
+        margin-right: 10px;
+        border-radius: 50%;
+        transition: 0.3s;
+        &:hover { background: $secondary-color; transform: translateY(-3px); }
+      }
+    }
+  }
+
+  // Copyright Section
+  .footer-bottom {
+    background-color: darken($footer-bg, 5%);
+    padding: 20px 0;
+    text-align: center;
+    border-top: 1px solid rgba(255,255,255,0.05);
+    font-size: 0.85rem;
+
+    .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    a { color: $secondary-color; text-decoration: none; }
+  }
+}
+
+// Mobile Responsive
+@media (max-width: 768px) {
+  .footer-container .footer-content {
+    grid-template-columns: 1fr;
+    text-align: center;
+    
+    .footer-column h4::after { left: 50%; transform: translateX(-50%); }
+    .footer-logo { justify-content: center; }
+  }
+  
+  .footer-container .footer-bottom .container {
+    flex-direction: column;
+    gap: 10px;
+  }
+}

@@ -1,0 +1,9 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; // Chiều cao tối thiểu bằng màn hình
+}
+
+.main-content {
+  flex: 1; // Tự động giãn ra để đẩy Footer xuống dưới
+}

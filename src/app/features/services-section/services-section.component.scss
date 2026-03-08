@@ -1,0 +1,164 @@
+// services.component.scss
+$primary-blue: #0056b3;
+$accent-orange: #f39c12;
+$bg-light: #f8f9fa;
+$transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+
+.services-section {
+  padding: 80px 0;
+  background-color: $bg-light;
+  font-family: 'Roboto', sans-serif;
+
+  .section-header {
+    text-align: center;
+    margin-bottom: 50px;
+
+    .sub-title {
+      color: $accent-orange;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      font-size: 0.9rem;
+    }
+
+    h2 {
+      color: $primary-blue;
+      font-size: 2.5rem;
+      margin: 10px 0 20px;
+      font-weight: 800;
+    }
+
+    p {
+      max-width: 600px;
+      margin: 0 auto;
+      color: #666;
+    }
+  }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    margin-bottom: 40px;
+  }
+
+  .service-card {
+    background: #ffffff;
+    padding: 40px 30px;
+    border-radius: 15px;
+    text-align: center;
+    transition: $transition;
+    border-bottom: 4px solid transparent;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+
+    .card-icon {
+      width: 80px;
+      height: 80px;
+      background: rgba($primary-blue, 0.1);
+      color: $primary-blue;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      margin: 0 auto 25px;
+      transition: $transition;
+    }
+
+    h3 {
+      font-size: 1.25rem;
+      color: #333;
+      margin-bottom: 15px;
+    }
+
+    p {
+      color: #777;
+      font-size: 0.95rem;
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+
+    .read-more {
+      text-decoration: none;
+      color: $primary-blue;
+      font-weight: 600;
+      font-size: 0.9rem;
+      i { margin-left: 5px; transition: 0.3s; }
+    }
+
+    // Hover effect
+    &:hover {
+      transform: translateY(-10px);
+      border-bottom-color: $accent-orange;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+
+      .card-icon {
+        background: $primary-blue;
+        color: #fff;
+        transform: rotateY(180deg);
+      }
+      
+      .read-more i { transform: translateX(5px); }
+    }
+
+    // Kiểu nổi bật cho dịch vụ chính
+    &.highlighted {
+      background: linear-gradient(135deg, $primary-blue 0%, darken($primary-blue, 15%) 100%);
+      h3, p, .read-more { color: #fff; }
+      .card-icon { background: rgba(255,255,255,0.2); color: #fff; }
+      .read-more { opacity: 0.8; }
+    }
+  }
+
+  .view-all {
+    text-align: center;
+    .btn-all {
+      padding: 15px 35px;
+      background: transparent;
+      border: 2px solid $primary-blue;
+      color: $primary-blue;
+      font-weight: 700;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: $transition;
+
+      &:hover {
+        background: $primary-blue;
+        color: #fff;
+      }
+    }
+  }
+}
+
+.animate-in {
+  animation: fadeInUp 0.6s ease forwards;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.btn-all {
+  // ... các thuộc tính cũ ...
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0 auto;
+  
+  i {
+    transition: transform 0.3s ease;
+  }
+}
+
+// Thêm hiệu ứng cho từng card xuất hiện trễ dần (Stagger effect)
+.service-card:nth-child(5) { animation-delay: 0.1s; }
+.service-card:nth-child(6) { animation-delay: 0.2s; }
+.service-card:nth-child(7) { animation-delay: 0.3s; }
+.service-card:nth-child(n+8) { animation-delay: 0.4s; }

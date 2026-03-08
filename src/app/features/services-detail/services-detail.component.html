@@ -1,0 +1,16 @@
+<section class="service-detail">
+  <div class="container" *ngIf="service">
+    <div class="detail-header">
+      <div class="icon"><i [class]="service.icon"></i></div>
+      <h1>{{ service.title }}</h1>
+    </div>
+    <div class="detail-content">
+      <p>{{ service.desc }}</p>
+      <p>Chi tiết dịch vụ sẽ được cập nhật sớm. Liên hệ hotline: 0936.262.604</p>
+    </div>
+    <a routerLink="/" class="back-link">Quay lại trang chủ</a>
+  </div>
+  <div *ngIf="!service">
+    <p>Dịch vụ không tồn tại.</p>
+  </div>
+</section>
